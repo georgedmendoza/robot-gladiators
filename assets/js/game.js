@@ -1,3 +1,11 @@
+/*GAME FUNCTIONS */
+
+//random number
+var randomNumber = function(min, max){
+    var value = Math.floor(Math.random() * (max - min + 1) + min );
+    return value;
+}
+
 var fightOrSkip = function(){
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
     promptFight = promptFight.toLocaleLowerCase();
@@ -7,6 +15,7 @@ var fightOrSkip = function(){
         return fightOrSkip();
     }
     promptFight = promptFight.toLocaleLowerCase();
+
     if (promptFight === "skip") {
         // confirm player wants to skip
         var confirmSkip = window.confirm("Are you sure you'd like to quit?");
@@ -95,6 +104,7 @@ var startGame = function(){
     playerInfo.reset();
     // fight each enemy-robot by looping over them and fighting them one at a time
     for (var i = 0; i < enemyInfo.length; i++) {
+        console.log(playerInfo)
     // if player is still alive, keep fighting
         if (playerInfo.health > 0) {
             // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
@@ -106,6 +116,7 @@ var startGame = function(){
             // reset enemy.health before starting new fight
             pickedEnemyObj.health = randomNumber(40, 60);
 
+            console.log(pickedEnemyObj);
             // use debugger to pause script from running and check what's going on at that moment in the code
             // debugger;
 
@@ -192,17 +203,11 @@ var shop = function(){
         
         default:
             window.alert("You did not pick a valid option. Try again.");
-
             //call shop() again to force player to pick a valid option
             shop();
             break;
     }
-}
-
-var randomNumber = function(min, max){
-    var value = Math.floor(Math.random() * (max - min + 1) + min );
-    return value;
-}
+};
 
 // function to set name
 var getPlayerName = function(){
@@ -217,6 +222,9 @@ var getPlayerName = function(){
     return name;
 }
 
+/* END GAME FUNCTIONS */
+
+/* GAME INFORMATION / VARIABLES */
 var playerInfo = {
     name: getPlayerName(),
     health: 100,
@@ -264,5 +272,7 @@ var enemyInfo = [
 }
 ];
 
-// start the game when the page loads
+/* END GAME INFORMATION / VARIABLES */
+
+/* RUN GAME */
 startGame();
